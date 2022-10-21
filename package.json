@@ -16,7 +16,8 @@
     },
     "dependencies": {
         "bindings": "*",
-        "nan": "^2.15.0"
+        "nan": "^2.15.0",
+        "node-gyp": "^9.3.0"
     },
     "keywords": [
         "argon2",

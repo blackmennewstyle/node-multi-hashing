@@ -518,7 +518,7 @@ void verthash_hash(const unsigned char* blob_bytes, const size_t blob_size, cons
     memcpy(output, p1, HASH_OUT_SIZE);
 }
 
-void get_verthash_file() {
+int get_verthash_file() {
     if(verthash_file_created == 1) return 0;
     
     FILE* datfile = fopen(dat_file_name, "rb");
