@@ -1,5 +1,6 @@
 #include "verthash.h"
 #include <memory.h>
+#include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,8 +22,6 @@
 const char* dat_file_name = "~/verthash.dat";
 int verthash_file_created = 0;
 const char* input_header_hex = "000000203a297b4b7685170d7644b43e5a6056234cc2414edde454a87580e1967d14c1078c13ea916117b0608732f3f65c2e03b81322efc0a62bcee77d8a9371261970a58a5a715da80e031b02560ad8";
-unsigned char* blob_bytes;
-size_t blob_size;
 
 // Verthash file generation
 
@@ -519,7 +518,7 @@ void verthash_hash(const unsigned char* blob_bytes, const size_t blob_size, cons
     memcpy(output, p1, HASH_OUT_SIZE);
 }
 
-int get_verthash_file() {
+void get_verthash_file() {
     if(verthash_file_created == 1) return 0;
     
     FILE* datfile = fopen(dat_file_name, "rb");
