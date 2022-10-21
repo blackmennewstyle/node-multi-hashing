@@ -19,7 +19,10 @@
 #define BYTE_ALIGNMENT 16
 
 const char* dat_file_name = "~/verthash.dat";
+int verthash_file_created = 0;
 const char* input_header_hex = "000000203a297b4b7685170d7644b43e5a6056234cc2414edde454a87580e1967d14c1078c13ea916117b0608732f3f65c2e03b81322efc0a62bcee77d8a9371261970a58a5a715da80e031b02560ad8";
+unsigned char* blob_bytes;
+size_t blob_size;
 
 // Verthash file generation
 
@@ -435,7 +438,7 @@ void XiGraphIter(struct Graph *g, int64_t index)
     free(graphStack);
 }
 
-struct Graph *NewGraph(int64_t index, char *fileName, uint8_t *pk)
+struct Graph *NewGraph(int64_t index, const char *fileName, uint8_t *pk)
 {
     uint8_t exists = 0;
     FILE *db;
@@ -517,6 +520,8 @@ void verthash_hash(const unsigned char* blob_bytes, const size_t blob_size, cons
 }
 
 int get_verthash_file() {
+    if(verthash_file_created == 1) return 0;
+    
     FILE* datfile = fopen(dat_file_name, "rb");
     
     // File does not exist, we need to create it
@@ -556,6 +561,12 @@ int get_verthash_file() {
 
     fclose(datfile);
 
+    unsigned char input_header[HEADER_SIZE];
+    for(size_t count = 0; count < HEADER_SIZE; count++) {
+        sscanf(input_header_hex + count*2, "%2hhx", &input_header[count]);
+    }
+
     printf("SHA3 hashes...\n");
-    return 0
+    verthash_file_created = 1;
+    return 0;
 }
