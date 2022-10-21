@@ -76,7 +76,7 @@
                 "src/crypto/yescrypt/yescrypt-best.c",
                 "src/crypto/yescrypt/yescryptcommon.c",
                 "src/tiny_sha3/sha3.c",
-                "src/tiny_sha3/verthash.c",
+                "src/verthash.c",
             ],
             "include_dirs": [
                 "src/crypto",
